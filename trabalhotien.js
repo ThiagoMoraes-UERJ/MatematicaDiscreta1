@@ -1,7 +1,7 @@
 //uma entrada de uma fbf
-var strin = "(d & a) & (b | d')";
+var strin = "(d & a) & (b | d')>a'";
 // array com as prioridades
-var ListaPrioridades = ["'",'&','|'];
+var ListaPrioridades = ["'",'&','|','>'];
 // função que identifica o nome da função a ser montada
 function nomefunc(vetor,pos){
     var r = [];
@@ -10,6 +10,9 @@ function nomefunc(vetor,pos){
     }
     if(vetor[pos] == "'"){
        r = vetor[pos] = 'N';
+    }
+    if(vetor[pos] == ">"){
+       r = vetor[pos] = 'IMPLICA';
     }
     if(vetor[pos] == '|'){
        r = vetor[pos] = 'OU';
@@ -172,6 +175,7 @@ function resolveF (vet,ListaP){
     }
     vet = vetAntesEsquerda.concat(operadorEsq.concat(nomefunc(vet,posMaiorProcedencia).concat('('.concat(miolo.concat(')'.concat(operadorDir.concat(vetDepoisDireita)))))));
     vet = vet.join("");
+    
     return vet;
 }
 
@@ -192,9 +196,21 @@ function f(strinn,ListaP){
             ve[i] = "";
         }
     }
+    ve = ve.join("");
+    ve = vetorizar(ve);
+    for (var i = 0; i < ve.length; i++) {
+        if(ve[i]==","){
+            ve[i] = "";
+        }
+    }
+    window.alert(ve);
     for (var i = 0; i < ve.length; i++) {
         if(ve[i]=="0"){
-            ve[i] = ",";
+            if(ve[i-3]=="N"){
+              ve[i]='';
+            }else{
+            	ve[i] = ",";
+            }
         }
     }
     ve = ve.join("");
