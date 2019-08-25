@@ -1,12 +1,15 @@
 //uma entrada de uma fbf
-var strin = '(d & a) & (b | d)';
+var strin = "(d & a) & (b | d')";
 // array com as prioridades
-var ListaPrioridades = ['&','|'];
+var ListaPrioridades = ["'",'&','|'];
 // função que identifica o nome da função a ser montada
 function nomefunc(vetor,pos){
     var r = [];
     if(vetor[pos] == '&'){
        r = vetor[pos] = 'E';
+    }
+    if(vetor[pos] == "'"){
+       r = vetor[pos] = 'N';
     }
     if(vetor[pos] == '|'){
        r = vetor[pos] = 'OU';
