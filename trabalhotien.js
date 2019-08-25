@@ -1,7 +1,8 @@
+//uma entrada de uma fbf
 var strin = '(d & a) & (b | d)';
-
+// array com as prioridades
 var ListaPrioridades = ['&','|'];
-
+// função que identifica o nome da função a ser montada
 function nomefunc(vetor,pos){
     var r = [];
     if(vetor[pos] == '&'){
@@ -12,6 +13,7 @@ function nomefunc(vetor,pos){
     }
     return r;
 }
+// para não confundir o parentes da função com o parentes da fbf, troquei por []
 function precompila(vet2){
     //trocar parenteses por []
     for (var i = 0; i < vet2.length; i++) {
@@ -24,6 +26,7 @@ function precompila(vet2){
     }
     return vet2;
 }
+//transformar string em array e tirar o espaço do vetor 
 function vetorizar(carac){
     // transformr a estring vet em um vetor de arrays
     var vet = carac.split('');
@@ -38,6 +41,7 @@ function vetorizar(carac){
     }
     return vet2;
 }
+// pega a posição do ultimo abre parenteses
 function PegarAbreParent (vet){
    var pos = -1;
     for (var i = 0; i < vet.length; i++) {
@@ -47,6 +51,7 @@ function PegarAbreParent (vet){
     }
     return pos;
 }
+//pega a posição do primeiro fecha parenteses
 function PegarFechaParent (vet){
     var pos = -1;
     for(var i = 0; i< vet.length; i++){
@@ -56,6 +61,7 @@ function PegarFechaParent (vet){
     }
     return pos;
 }
+// identifica a posição do caracter de maior precedencia 
 function maiorProcedencia (vet,ListaP){
     var valorcarac = 100;
     var pos = -1;
@@ -70,6 +76,7 @@ function maiorProcedencia (vet,ListaP){
     }
     return pos;
 }
+// pega a posição do caracter a esquerda do de maior precedencia 
 function  operadorEsquerda (posi,ListaP,vet){
     var vc = posi - 1;
     for (var i = vc; i >= 0; i--) {
@@ -80,6 +87,7 @@ function  operadorEsquerda (posi,ListaP,vet){
     }
     return -1;
 }
+// pega a posição do caracter a direita do de maior precedencia 
 function  operadorDireita (posi,ListaP,vet){
     var vc = posi + 1;
     for (var i = vc; i < vet.length; i++) {
@@ -90,6 +98,7 @@ function  operadorDireita (posi,ListaP,vet){
     }
     return -1;
 }
+// pega a fbf identificando a primeira função de maior precedencia, atualizando a fbf com uma subfunção dentro dela  
 function resolveF (vet,ListaP){
    
     var posMaiorProcedencia = maiorProcedencia(vet,ListaP);
@@ -163,7 +172,7 @@ function resolveF (vet,ListaP){
     return vet;
 }
 
-
+// função que resolve toda a fbf atualizando ela em várias subfunções
 function f(strinn,ListaP){
     var ve = vetorizar(strinn);
     var vetor = precompila(ve);
@@ -191,6 +200,7 @@ function f(strinn,ListaP){
 
 window.alert(f(strin,ListaPrioridades));
 
+// dar a maior precedencia oq estiver em parenteses para fazer as subfunções 
 function parenteses(vetor,ListaP){
     
     while(PegarAbreParent(vetor) != -1){
