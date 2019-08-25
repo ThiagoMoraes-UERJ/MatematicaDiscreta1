@@ -203,7 +203,6 @@ function f(strinn,ListaP){
             ve[i] = "";
         }
     }
-    window.alert(ve);
     for (var i = 0; i < ve.length; i++) {
         if(ve[i]=="0"){
             if(ve[i-3]=="N"){
