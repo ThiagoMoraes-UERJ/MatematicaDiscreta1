@@ -198,6 +198,7 @@ function f(strinn,ListaP){
     return ve;
 }
 
+// para testar chama um alert mostrando o resultado da função exemplo
 window.alert(f(strin,ListaPrioridades));
 
 // dar a maior precedencia oq estiver em parenteses para fazer as subfunções 
